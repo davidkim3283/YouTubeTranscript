@@ -25,6 +25,8 @@ def health():
 @app.route('/transcript/<video_id>')
 def get_transcript(video_id):
     try:
+        import requests
+        
         # Fetch transcript using youtube-transcript-api
         api = YouTubeTranscriptApi()
         transcript_list = api.list(video_id)
@@ -45,9 +47,35 @@ def get_transcript(video_id):
         
         full_transcript = ' '.join(text_parts)
         
-        # Get metadata (basic info)
+        # Fetch video metadata from YouTube page
+        try:
+            video_url = f'https://www.youtube.com/watch?v={video_id}'
+            headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}
+            response = requests.get(video_url, headers=headers, timeout=10)
+            html = response.text
+            
+            # Extract title
+            title_match = re.search(r'<meta property="og:title" content="([^"]+)"', html)
+            title = title_match.group(1) if title_match else "Unknown Title"
+            
+            # Extract author
+            author_match = re.search(r'"author":"([^"]+)"', html)
+            author = author_match.group(1) if author_match else "Unknown Author"
+            
+            # Extract publish date
+            date_match = re.search(r'"publishDate":"([^"]+)"', html)
+            publish_date = date_match.group(1) if date_match else "Unknown Date"
+        except:
+            title = "Unknown Title"
+            author = "Unknown Author"
+            publish_date = "Unknown Date"
+        
+        # Get metadata
         metadata = {
             'video_id': video_id,
+            'title': title,
+            'author': author,
+            'publish_date': publish_date,
             'language': fetched.language,
             'language_code': fetched.language_code,
             'is_generated': fetched.is_generated,
