@@ -9,3 +9,14 @@ ENV/
 .venv
 *.log
 .DS_Store
+.venv/
+YouTubeTranscript-macOS/.venv/
+*.xcuserstate
+*.xcworkspace
+xcuserdata/
+DerivedData/
+build/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
