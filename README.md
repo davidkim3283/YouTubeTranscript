@@ -1,59 +1,148 @@
-# YouTube Transcript API Backend
+# YouTube Transcript Tools
 
-Simple Flask API for fetching YouTube transcripts. Designed to work with the iOS YouTube Transcript app.
+Extract YouTube video transcripts with ease!
 
-## Endpoints
+## 📦 What's Included
 
-- `GET /` - API info
-- `GET /health` - Health check
-- `GET /transcript/<video_id>` - Get transcript for a video
+### 1. **macOS App** (Recommended) ⭐
+Native macOS application with Python backend.
 
-## Example Response
+**Location:** `YouTubeTranscript-macOS/`
 
+**Features:**
+- ✅ Native macOS interface
+- ✅ Reliable Python-based extraction
+- ✅ Smart paragraph formatting
+- ✅ Video metadata (title, author, date)
+- ✅ Save & share transcripts
+- ✅ No API keys needed
+
+**[Download Latest Release →](https://github.com/davidkim3283/YouTubeTranscript/releases)**
+
+### 2. **Backend API** (Optional)
+Flask API for programmatic access.
+
+**Location:** Root directory
+
+**Use if you need:**
+- Web service integration
+- Multiple client support
+- Remote transcript extraction
+
+**Deployed at:** https://youtubetranscript-fixb.onrender.com
+
+---
+
+## 🚀 Quick Start
+
+### For Users (macOS App)
+
+1. **Download** the latest release
+2. **Unzip** and drag to Applications
+3. **Open** the app (right-click → Open first time)
+4. **Paste** a YouTube URL
+5. **Get your transcript!**
+
+### For Developers (macOS App)
+
+```bash
+# Clone the repo
+git clone https://github.com/davidkim3283/YouTubeTranscript.git
+cd YouTubeTranscript/YouTubeTranscript-macOS
+
+# Setup Python environment
+./setup_bundle.sh
+
+# Open in Xcode
+open YouTubeTranscript.xcodeproj
+```
+
+### For Developers (Backend API)
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run locally
+python app.py
+
+# Or deploy to Render/Railway/etc
+```
+
+---
+
+## 📖 Documentation
+
+- **macOS App:** See `YouTubeTranscript-macOS/README.md`
+- **Distribution:** See `YouTubeTranscript-macOS/DISTRIBUTION.md`
+- **Backend API:** See API endpoints below
+
+---
+
+## 🔌 API Endpoints
+
+### `GET /`
+API information and available endpoints
+
+### `GET /health`
+Health check
+
+### `GET /transcript/<video_id>`
+Get transcript for a YouTube video
+
+**Example:**
+```bash
+curl https://youtubetranscript-fixb.onrender.com/transcript/dQw4w9WgXcQ
+```
+
+**Response:**
 ```json
 {
   "success": true,
-  "transcript": "Full transcript text here...",
+  "transcript": "Full transcript text...",
   "metadata": {
     "video_id": "dQw4w9WgXcQ",
+    "title": "Video Title",
+    "author": "Channel Name",
+    "publish_date": "2009-10-25",
     "language": "English",
-    "language_code": "en",
-    "is_generated": true,
-    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "fetched_at": "2024-11-26T19:00:00"
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   }
 }
 ```
 
-## Deploy to Render
+---
 
-1. Push this code to a GitHub repository
-2. Go to [Render Dashboard](https://dashboard.render.com/)
-3. Click "New +" → "Web Service"
-4. Connect your GitHub repository
-5. Render will auto-detect the `render.yaml` configuration
-6. Click "Create Web Service"
-7. Wait for deployment (2-3 minutes)
-8. Copy your service URL (e.g., `https://your-app.onrender.com`)
+## 🛠️ Tech Stack
 
-## Local Development
+- **macOS App:** Swift, SwiftUI, Python
+- **Backend:** Flask, youtube-transcript-api
+- **Deployment:** Render (free tier)
 
-```bash
-pip install -r requirements.txt
-python app.py
-```
+---
 
-Visit `http://localhost:10000`
+## ⚠️ Limitations
 
-## Usage
+- Only works with videos that have captions enabled
+- Some videos may have captions disabled by creators
+- Backend API may be rate-limited by YouTube
 
-```bash
-# Test the API
-curl https://your-app.onrender.com/transcript/dQw4w9WgXcQ
-```
+---
 
-## Notes
+## 📝 License
 
-- Free tier on Render spins down after 15 minutes of inactivity
-- First request after spin-down may take 30-60 seconds
-- Upgrade to paid tier ($7/month) for always-on service
+MIT License - feel free to use and modify!
+
+---
+
+## 🙏 Credits
+
+Uses [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) for reliable transcript extraction.
+
+---
+
+## 🐛 Issues & Support
+
+Found a bug? Have a feature request?
+
+**[Open an Issue →](https://github.com/davidkim3283/YouTubeTranscript/issues)**
